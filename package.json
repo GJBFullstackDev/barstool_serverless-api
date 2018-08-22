@@ -1,0 +1,61 @@
+{
+  "name": "serverless-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Serverless API Boilerplate written in Node.js",
+  "author": "Barstool Sports <engineering@barstoolsports.com>",
+  "engines": {
+    "node": ">=6.10",
+    "yarn": "^1.5.1"
+  },
+  "repository": {
+    "url": "https://github.com/BarstoolSports/serverless-api"
+  },
+  "dependencies": {
+    "@google/maps": "0.4.5",
+    "@iopipe/core": "1.8.0",
+    "apns2": "3.0.1",
+    "app-module-path": "2.2.0",
+    "aws-sdk": "2.208.0",
+    "axios": "0.18.0",
+    "bcrypt": "1.0.3",
+    "bluebird": "3.5.1",
+    "body-parser": "1.18.2",
+    "cors": "2.8.4",
+    "express": "4.16.3",
+    "express-validator": "4.3.0",
+    "fastly": "2.2.0",
+    "fb": "2.0.0",
+    "forky": "0.3.0",
+    "helmet": "3.12.0",
+    "lodash": "4.17.5",
+    "luxon": "0.5.6",
+    "md5": "2.2.1",
+    "mongodb": "3.0.4",
+    "mongoose": "5.0.10",
+    "postmark": "1.6.1",
+    "request-json": "^0.6.3",
+    "response-time": "2.3.2",
+    "serverless-http": "1.5.3",
+    "twitter": "^1.7.1",
+    "uuid": "3.2.1",
+    "winston": "2.4.1",
+    "winston-papertrail": "1.0.5"
+  },
+  "devDependencies": {
+    "csv-parser": "^1.12.0",
+    "eslint": "^4.18.2",
+    "hygen": "^1.5.7",
+    "mocha": "^5.0.0",
+    "require-directory": "^2.1.1",
+    "serverless": "^1.26.1",
+    "serverless-offline": "^3.18.0",
+    "should": "^13.0.0",
+    "supertest": "^3.0.0"
+  },
+  "scripts": {
+    "postinstall": "make postinstall",
+    "start": "node process/server",
+    "test": "make test-all"
+  }
+}

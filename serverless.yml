@@ -1,0 +1,55 @@
+service: serverless-api
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${opt:stage, 'dev'}
+  memorySize: 1024
+  timeout: 10
+  versionFunctions: false
+  environment:
+    NODE_ENV: ${env:NODE_ENV}
+    MONGODB_URI: ${env:MONGODB_URI}
+    IOPIPE_TOKEN: ${env:IOPIPE_TOKEN}
+    DISABLE_AUTO_INDEX: ${env:DISABLE_AUTO_INDEX}
+
+functions:
+  #---------------------------------------------------------------------------*
+  # Events System
+  #---------------------------------------------------------------------------*
+  appEvent:
+    timeout: 30
+    handler: lambdas/events.handler
+    events:
+      - sns: app-event-${env:NODE_ENV}
+
+  #---------------------------------------------------------------------------*
+  # Media Processing
+  #---------------------------------------------------------------------------*
+  mediaCron:
+    timeout: 30
+    handler: lambdas/cron.handler
+    events:
+      - http:
+          path: /cron/tweets
+          method: GET
+          cors: true
+      - schedule: rate(1 minute)
+
+  #---------------------------------------------------------------------------*
+  # HTTP Proxy
+  #---------------------------------------------------------------------------*
+  proxy:
+    handler: lambdas/http.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+          cors: true
+      - http:
+          path: /{path+}
+          method: ANY
+          cors: true
